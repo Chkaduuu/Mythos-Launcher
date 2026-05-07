@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mythos Launcher</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <!-- Title Bar -->
+  <div class="titlebar" id="titlebar">
+    <div class="titlebar-drag"></div>
+    <div class="titlebar-controls">
+      <button class="tb-btn tb-min" id="btn-min" title="Minimize">&#8722;</button>
+      <button class="tb-btn tb-max" id="btn-max" title="Maximize">&#9633;</button>
+      <button class="tb-btn tb-close" id="btn-close" title="Close">&#10005;</button>
+    </div>
+  </div>
+
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+      <div class="sidebar-logo">
+        <img src="../assets/logo.png" alt="Mythos Core Launcher" class="logo-img" />
+      </div>
+
+      <ul class="nav-list">
+        <li class="nav-item active" data-page="home" title="Home">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          </span>
+          <span class="nav-label">Home</span>
+        </li>
+        <li class="nav-item" data-page="profile" title="Profile">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          </span>
+          <span class="nav-label">Profile</span>
+        </li>
+        <li class="nav-item" data-page="settings" title="Settings">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.48.48 0 0 0-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+          </span>
+          <span class="nav-label">Settings</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="account-section" id="account-section">
+          <div class="account-avatar" id="account-avatar">?</div>
+          <div class="account-info" id="account-info">
+            <span class="account-name" id="account-name">Not logged in</span>
+            <span class="account-type" id="account-type">Click to sign in</span>
+          </div>
+          <button class="account-login-btn" id="account-btn">Sign In</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- HOME PAGE -->
+      <section class="page active" id="page-home">
+        <div class="page-header">
+          <h1 class="page-title">Play Minecraft</h1>
+          <p class="page-subtitle">Select your version and launch the game</p>
+        </div>
+
+        <div class="home-content">
+          <div class="version-card">
+            <div class="version-header">
+              <svg class="version-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.34C18 2.54 15.67 1 12 1S6 2.54 6 4.66c0 .46.11.9.18 1.34H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/></svg>
+              <span>Version Select</span>
+            </div>
+
+            <div class="version-filter-row">
+              <button class="filter-btn active" data-filter="release">Releases</button>
+              <button class="filter-btn" data-filter="snapshot">Snapshots</button>
+            </div>
+
+            <div class="version-selector-wrap">
+              <select id="version-select" class="version-select">
+                <option value="">Loading versions...</option>
+              </select>
+              <svg class="select-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+            </div>
+
+            <div class="version-info" id="version-info">
+              <span class="vi-type" id="vi-type">—</span>
+              <span class="vi-date" id="vi-date">—</span>
+            </div>
+          </div>
+
+          <div class="play-zone">
+            <div class="launch-status" id="launch-status" style="display:none;">
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+              </div>
+              <p class="progress-label" id="progress-label">Preparing...</p>
+            </div>
+
+            <button class="play-btn" id="play-btn">
+              <span class="play-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+              <span id="play-text">PLAY</span>
+            </button>
+
+            <div class="launch-log" id="launch-log" style="display:none;">
+              <p class="log-title">Console</p>
+              <div class="log-entries" id="log-entries"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROFILE PAGE -->
+      <section class="page" id="page-profile">
+        <div class="page-header">
+          <h1 class="page-title">Profile</h1>
+          <p class="page-subtitle">Manage your Minecraft identity</p>
+        </div>
+
+        <div class="profile-content">
+          <div class="skin-viewer-card">
+            <div class="skin-viewer-header">
+              <span>3D Skin Preview</span>
+              <small>Drag to rotate</small>
+            </div>
+            <div class="skin-viewer-wrap" id="skin-viewer-wrap">
+              <canvas id="skin-canvas"></canvas>
+              <div class="skin-placeholder" id="skin-placeholder">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="16" y="4" width="32" height="32" rx="2" fill="#5a3a1a" opacity="0.4"/>
+                  <rect x="20" y="36" width="10" height="22" rx="2" fill="#5a3a1a" opacity="0.4"/>
+                  <rect x="34" y="36" width="10" height="22" rx="2" fill="#5a3a1a" opacity="0.4"/>
+                </svg>
+                <p>No skin loaded</p>
+              </div>
+            </div>
+            <div class="skin-controls">
+              <button class="skin-btn" id="upload-skin-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                Upload Skin
+              </button>
+              <button class="skin-btn secondary" id="reset-skin-btn">Reset</button>
+            </div>
+          </div>
+
+          <div class="profile-info-card">
+            <div class="profile-info-header">Player Info</div>
+            <div class="profile-field">
+              <label>Username</label>
+              <div class="profile-value" id="profile-username">—</div>
+            </div>
+            <div class="profile-field">
+              <label>Account Type</label>
+              <div class="profile-value" id="profile-account-type">—</div>
+            </div>
+            <div class="profile-field">
+              <label>UUID</label>
+              <div class="profile-value profile-uuid" id="profile-uuid">—</div>
+            </div>
+            <div class="profile-actions">
+              <button class="profile-logout-btn" id="profile-logout-btn">Sign Out</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS PAGE -->
+      <section class="page" id="page-settings">
+        <div class="page-header">
+          <h1 class="page-title">Launcher Settings</h1>
+          <p class="page-subtitle">Configure memory and launcher behavior</p>
+        </div>
+
+        <div class="settings-content">
+          <div class="settings-card">
+            <div class="settings-section-title">Memory Allocation</div>
+
+            <div class="ram-display">
+              <span class="ram-value" id="ram-value">2048</span>
+              <span class="ram-unit">MB</span>
+              <span class="ram-gb" id="ram-gb">( 2.0 GB )</span>
+            </div>
+
+            <div class="ram-slider-wrap">
+              <span class="ram-min">512 MB</span>
+              <input type="range" id="ram-slider" class="ram-slider" min="512" max="8192" step="256" value="2048" />
+              <span class="ram-max" id="ram-max-label">8192 MB</span>
+            </div>
+
+            <div class="ram-presets">
+              <button class="ram-preset" data-ram="1024">1 GB</button>
+              <button class="ram-preset" data-ram="2048">2 GB</button>
+              <button class="ram-preset" data-ram="4096">4 GB</button>
+              <button class="ram-preset" data-ram="6144">6 GB</button>
+              <button class="ram-preset" data-ram="8192">8 GB</button>
+            </div>
+
+            <div class="ram-info">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              We recommend allocating no more than half of your system RAM.
+              System total: <span id="system-ram-label">loading...</span>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <div class="settings-section-title">Java Path</div>
+            <div class="settings-field">
+              <input type="text" id="java-path-input" class="settings-input" placeholder="Leave empty to use system Java" />
+              <small class="settings-hint">Optional — provide a custom Java executable path if needed.</small>
+            </div>
+          </div>
+
+          <div class="settings-save-row">
+            <button class="save-btn" id="save-settings-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+              Save Settings
+            </button>
+            <span class="save-status" id="save-status"></span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Mythos Launcher</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body class="auth-body">
+  <div class="auth-window">
+    <!-- Title bar -->
+    <div class="auth-titlebar">
+      <span class="auth-title-text">Sign In</span>
+      <button class="tb-btn tb-close" id="auth-close-btn" title="Close">&#10005;</button>
+    </div>
+
+    <!-- Logo -->
+    <div class="auth-logo-wrap">
+      <img src="../assets/logo.png" alt="Mythos Core Launcher" class="auth-logo" />
+    </div>
+
+    <!-- Mode Toggle -->
+    <div class="auth-toggle">
+      <button class="auth-mode-btn active" id="btn-online" data-mode="online">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        Online
+      </button>
+      <button class="auth-mode-btn" id="btn-offline" data-mode="offline">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.18 8.46C19.71 5.37 17.04 3 13.83 3 12.05 3 10.43 3.66 9.17 4.73 7.7 3.07 5.57 2 3.17 2v2c1.75 0 3.27.87 4.21 2.2L6 7.6C4.27 8.31 3 9.97 3 12c0 2.49 1.94 4.52 4.4 4.65L18 8.28c.07.38.13.77.13 1.17 0 2.7-2.25 4.89-5.01 4.55-1.05-.13-1.99-.6-2.72-1.28l-1.43 1.43C9.95 15.08 10.95 15.71 12 16c.31.09.62.15.95.19V18H9v2h6v-2h-3v-1.81C15.16 15.73 18 12.97 18 9.45c0-.33-.03-.66-.08-.99l2.26-2.26-.42-.74c.13-.01.25.01.38.01-.07 0-.14-.01-.21-.01h.01C20.28 5.46 20.35 6.95 20.18 8.46z"/></svg>
+        Offline
+      </button>
+    </div>
+
+    <!-- Online Panel -->
+    <div class="auth-panel" id="panel-online">
+      <p class="auth-description">
+        Sign in with your Microsoft account to play on online servers and access premium features.
+      </p>
+      <button class="microsoft-btn" id="microsoft-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11.5 2.5H2.5v9h9V2.5zM21.5 2.5h-9v9h9V2.5zM11.5 12.5H2.5v9h9v-9zM21.5 12.5h-9v9h9v-9z" fill="white"/>
+        </svg>
+        Continue with Microsoft
+      </button>
+      <p class="auth-note">You must own Minecraft: Java Edition</p>
+    </div>
+
+    <!-- Offline Panel -->
+    <div class="auth-panel hidden" id="panel-offline">
+      <p class="auth-description">
+        Play offline without a Minecraft account. Online servers may be unavailable.
+      </p>
+      <div class="auth-field">
+        <label for="offline-username">Username</label>
+        <input
+          type="text"
+          id="offline-username"
+          class="auth-input"
+          placeholder="Enter your username"
+          maxlength="16"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <small class="auth-field-hint">3–16 characters, letters, numbers and underscores only</small>
+      </div>
+      <div class="auth-error" id="offline-error" style="display:none;"></div>
+      <button class="auth-submit-btn" id="offline-submit-btn">Play Offline</button>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="auth-loading" id="auth-loading" style="display:none;">
+      <div class="auth-spinner"></div>
+      <p>Signing in with Microsoft...</p>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
